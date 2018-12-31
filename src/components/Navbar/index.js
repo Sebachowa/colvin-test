@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  NavbarContainer,
-  Logo,
-  Counter
-} from './styled.js'
+import { NavbarContainer, Logo, Counter } from './styled.js'
 
 const Navbar = (props) => {
   const quotes = 10; // Replace this by props.quotes.length
