@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: row;
+  height: calc(100% - 50px);
 `
 
 const App = () => {
