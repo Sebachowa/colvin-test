@@ -1,14 +1,31 @@
-import React from 'react'
+import React from 'react';
 
-const SearchImage = (props) => {
-  return (
-    <div>
-      <form action="">
-        <input type="text"/>
-        <input type="submit"/>
-      </form>
-    </div>
-  )
+class SearchImage extends React.Component {
+  state = {
+    term: '',
+    selectedImage: ''
+  }
+
+  onFormSubmit = async (event) => {
+    event.preventDefault();
+    this.props.onSubmit(this.state.term)
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onFormSubmit}>
+          <input 
+            type="text" 
+            value={this.state.term} 
+            onChange={e => this.setState({ term: e.target.value })} 
+            placeholder="Search image..." 
+          />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    )
+  }
 }
 
 export default SearchImage
