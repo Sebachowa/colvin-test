@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components"
 
-import CardList from './CardList'
+import QuoteList from './QuoteList'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 
@@ -21,7 +21,7 @@ const App = () => {
       <Navbar />
       <Content>
         <Sidebar />
-        <CardList />
+        <QuoteList />
       </Content>
     </Wrapper>
   )

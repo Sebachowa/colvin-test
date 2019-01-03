@@ -3,11 +3,13 @@ import './tabStyle.css';
 import React from 'react';
 import axios from 'axios';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { connect } from 'react-redux';
 
 import { SidebarContainer } from './styled.js'
 import QuoteInput from '../QuoteInput'
 import SearchImage from '../SearchImage'
 import RandomSelector from '../RandomSelector'
+import { addQuote } from '../../actions';
 
 class Sidebar extends React.Component {
   state = {
@@ -28,14 +30,14 @@ class Sidebar extends React.Component {
   }
 
   onQuoteSubmit = (quote) => {
-    // agregar la quote al state (redux)
-    console.log(quote)
+    const { addQuote } = this.props;
+    addQuote(quote);
   }
 
   render() {
     return (
       <SidebarContainer>
-        <Tabs defaultIndex={0} onSelect={index => console.log(index)}>
+        <Tabs defaultIndex={0}>
           <TabList>
             <Tab>Create Quote</Tab>
             <Tab>Lazy Mode</Tab>
@@ -54,4 +56,11 @@ class Sidebar extends React.Component {
   }
 }
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    quotes: state.quotes
+  }
+}
+
+export default connect(mapStateToProps, { addQuote })(Sidebar);
