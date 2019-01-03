@@ -30,12 +30,16 @@ class QuoteInput extends React.Component {
               onChange={(e) => this.setState({ content: e.target.value })}
               value={this.state.content} 
               type="text" 
-              placeholder="Quote content" />
+              placeholder="Quote content"
+              image={this.props.image}
+            />
             <Input 
               onChange={(e) => this.setState({ author: e.target.value})} 
               value={this.state.author} 
               type="text" 
-              placeholder="Author" />
+              placeholder="Author"
+              image={this.props.image}
+            />
             <input type="submit"/>
           </Form>
           <p>{this.state.errorMessage}</p>

@@ -8,7 +8,7 @@ export const Card = styled.div`
   background-position: center;
   width: 400px;
   height: 400px;
-  position: relative; /* If you want text inside of it */
+  position: relative;
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
   :after {
     content: "";
@@ -44,8 +44,8 @@ export const QuoteBody = styled.h1`
 `;
 
 export const QuoteAuthor = styled.h1`
-  width: 80%  
-  margin-top: 20px
+  width: 80%;
+  margin-top: 20px;
   font-size: 20px;
   text-align: right;
 `;

@@ -22,7 +22,6 @@ const mapStateToProps = state => {
   return {
     quotes: state.quotes
   }
-
 }
 
 export default connect(mapStateToProps)(QuoteList)
