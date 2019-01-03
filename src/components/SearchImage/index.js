@@ -14,11 +14,12 @@ class SearchImage extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.onFormSubmit}>
+        <form onSubmit={this.onFormSubmit} ref="myForm">
           <input 
             type="text" 
             value={this.state.term} 
-            onChange={e => this.setState({ term: e.target.value })} 
+            onChange={e => this.setState({ term: e.target.value })}
+            onBlur={this.onFormSubmit}
             placeholder="Search image..." 
           />
           <input type="submit" value="Submit" />

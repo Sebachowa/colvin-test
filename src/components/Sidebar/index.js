@@ -21,8 +21,15 @@ class Sidebar extends React.Component {
         Authorization: 'Client-ID caf295221fb949ce9661404707301ecbf00021083633bd3e5e3827278b3fef54'
       }
     })
-    const randomImage = response.data.results[Math.floor(Math.random() * response.data.results.length)]
-    this.setState({ selectedImage: randomImage.urls.regular })
+    if (response.data.results.length) {
+      const randomImage = response.data.results[Math.floor(Math.random() * response.data.results.length)]
+      this.setState({ selectedImage: randomImage.urls.regular })
+    }
+  }
+
+  onQuoteSubmit = (quote) => {
+    // agregar la quote al state (redux)
+    console.log(quote)
   }
 
   render() {
@@ -35,7 +42,7 @@ class Sidebar extends React.Component {
           </TabList>
           <TabPanel>
             <SearchImage onSubmit={this.onSearchImageSubmit} />
-            <QuoteInput image={this.state.selectedImage}/>
+            <QuoteInput onSubmit={this.onQuoteSubmit} image={this.state.selectedImage}/>
           </TabPanel>
           <TabPanel>
             <RandomSelector />

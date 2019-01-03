@@ -1,16 +1,48 @@
 import React from 'react'
+import { QuoteContainer, Form, Input, Textarea } from './styled.js'
 
-const QuoteInput = (props) => {
-  return (
-    <div className="quote-input">
-    <form action="">
-      <img src={props.image} alt=""/>
-      <input type="text"/>
-      <input type="text"/>
-      <input type="submit"/>
-    </form>
-    </div>
-  )
+class QuoteInput extends React.Component {
+  state = {
+    image: '',
+    content: '',
+    author: '',
+    errorMessage: ''
+  }
+  
+  onQuoteSubmit = (event) => {
+    const { content, author} = this.state;
+    const { image, onSubmit} = this.props;
+    event.preventDefault();
+    if (!image) this.setState({ errorMessage: 'Please select an image' });
+    if (!content) this.setState({ errorMessage: 'Please provide some content' });
+    if (!author) this.setState({ errorMessage: 'Please provide an author' });
+    if (image && content && author) {
+      onSubmit({image, content, author})
+      this.setState({ errorMessage: '' })
+    };
+  }
+  
+  render() {
+    return (
+        <QuoteContainer image={this.props.image}>
+          <Form onSubmit={this.onQuoteSubmit}>
+            <Textarea
+              onChange={(e) => this.setState({ content: e.target.value })}
+              value={this.state.content} 
+              type="text" 
+              placeholder="Quote content..." />
+            <Input 
+              onChange={(e) => this.setState({ author: e.target.value})} 
+              value={this.state.author} 
+              type="text" 
+              placeholder="Author" />
+            <input type="submit"/>
+          </Form>
+          <p>{this.state.errorMessage}</p>
+        </QuoteContainer>
+        
+    )
+  }
 }
 
-export default QuoteInput
+export default QuoteInput;
