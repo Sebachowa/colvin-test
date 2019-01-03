@@ -1,14 +1,16 @@
 import React from 'react'
 
+import { Card, QuoteContent,QuoteBody, QuoteAuthor } from './styled.js'
+
 const QuoteCard = (props) => {
   const { content, image, author } = props.quote;
-  console.log(props)
   return (
-    <div>
-      <p>{content}</p>
-      <p>{author}</p>
-      <p>{image}</p>
-    </div>
+    <Card image={image}>
+      <QuoteContent>
+        <QuoteBody>{content}</QuoteBody>
+        <QuoteAuthor>{author}</QuoteAuthor>
+      </QuoteContent>
+    </Card>
   )
 }
 

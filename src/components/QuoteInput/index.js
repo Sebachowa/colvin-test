@@ -30,7 +30,7 @@ class QuoteInput extends React.Component {
               onChange={(e) => this.setState({ content: e.target.value })}
               value={this.state.content} 
               type="text" 
-              placeholder="Quote content..." />
+              placeholder="Quote content" />
             <Input 
               onChange={(e) => this.setState({ author: e.target.value})} 
               value={this.state.author} 

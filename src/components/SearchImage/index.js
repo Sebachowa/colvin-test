@@ -14,7 +14,7 @@ class SearchImage extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.onFormSubmit} ref="myForm">
+        <form onSubmit={this.onFormSubmit}>
           <input 
             type="text" 
             value={this.state.term} 
