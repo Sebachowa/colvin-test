@@ -18,7 +18,10 @@ class Sidebar extends React.Component {
 
   onSearchImageSubmit = async (term) => {
     const response = await axios.get('https://api.unsplash.com/search/photos', {
-      params: { query: term },
+      params: { 
+        query: term,
+        orientation: 'squarish'
+      },
       headers: {
         Authorization: 'Client-ID caf295221fb949ce9661404707301ecbf00021083633bd3e5e3827278b3fef54'
       }
