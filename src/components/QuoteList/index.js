@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Quote from '../QuoteCard'
+import QuoteCard from '../QuoteCard'
 import { List } from './styled.js'
 
 class QuoteList extends Component {
   renderList = () => {
-    return this.props.quotes.map((card) => {
-      return <Quote key={card.id}>{card.content}</Quote>
+    return this.props.quotes.map((quote) => {
+      return <QuoteCard key={quote.id} quote={quote} />
     })
   }
 
