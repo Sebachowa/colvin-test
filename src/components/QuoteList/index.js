@@ -20,7 +20,7 @@ class QuoteList extends Component {
 
 const mapStateToProps = state => {
   return {
-    quotes: state.quotes
+    quotes: state.quotes.quoteList
   }
 }
 

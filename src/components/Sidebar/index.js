@@ -13,7 +13,9 @@ import { addQuote } from '../../actions';
 
 class Sidebar extends React.Component {
   state = {
-    selectedImage: ''
+    selectedImage: '',
+    content: '',
+    author: ''
   }
 
   onSearchImageSubmit = async (term) => {
@@ -32,6 +34,36 @@ class Sidebar extends React.Component {
     }
   }
 
+  onRandomImageSubmit = async (term) => {
+    const response = await axios.get('https://api.unsplash.com/photos/random', {
+      params: {
+        orientation: 'squarish'
+      },
+      headers: {
+        Authorization: 'Client-ID caf295221fb949ce9661404707301ecbf00021083633bd3e5e3827278b3fef54'
+      }
+    })
+    this.setState({ selectedImage: response.data.urls.regular })
+  }
+
+  onRandomQuoteSubmit = async () => {
+    const response = await axios.get('http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1')
+    let content = response.data[0].content
+    let author = response.data[0].title
+
+    if (content.length > 70 || content.includes("&#")) {
+      this.onRandomQuoteSubmit()
+      return;
+    }
+    
+    content = content.replace('<p>', "")
+    content = content.replace('</p>', "")
+    content = content.replace('.', "")
+    content = content.trim()
+    console.log(content)
+    this.setState({ content, author })
+  }
+
   onQuoteSubmit = (quote) => {
     const { addQuote } = this.props;
     addQuote(quote);
@@ -46,12 +78,27 @@ class Sidebar extends React.Component {
             <Tab>Lazy Mode</Tab>
           </TabList>
           <TabPanel>
-            <SearchImage onSubmit={this.onSearchImageSubmit} />
-            <QuoteInput onSubmit={this.onQuoteSubmit} image={this.state.selectedImage}/>
+            <SearchImage
+              onSubmit={this.onSearchImageSubmit}
+            />
+            <QuoteInput
+              onSubmit={this.onQuoteSubmit}
+              image={this.state.selectedImage}
+              isRandom={false}
+            />
           </TabPanel>
           <TabPanel>
-            <RandomSelector />
-            <QuoteInput />
+            <RandomSelector 
+              onRandomQuoteSubmit={this.onRandomQuoteSubmit}
+              onRandomImageSubmit={this.onRandomImageSubmit}
+            />
+            <QuoteInput
+              onSubmit={this.onQuoteSubmit}
+              isRandom={true}
+              image={this.state.selectedImage}
+              author={this.state.author}
+              content={this.state.content}
+            />
           </TabPanel>
         </Tabs>
       </SidebarContainer>

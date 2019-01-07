@@ -1,12 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchRandomImage, getRandomQuote } from '../../actions'
 
-const RandomSelector = (props) => {
-  return (
-    <div>
-      <button>Random quote</button>
-      <button>Random image</button>
-    </div>
-  )
+
+class RandomSelector extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.props.getRandomQuote}>Random quote</button>
+        <button onClick={this.props.fetchRandomImage}>Random image</button>
+      </div>
+    )
+  }
 }
 
-export default RandomSelector
+export default connect(null, { fetchRandomImage, getRandomQuote })(RandomSelector)

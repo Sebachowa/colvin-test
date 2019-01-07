@@ -20,3 +20,30 @@ export const removeQuote = id => {
     payload: id
   }
 }
+
+export const fetchImage = term => {
+  return {
+    type: 'FETCH_IMAGE',
+    payload: term
+  }
+}
+
+export const fetchRandomImage = () => {
+  return {
+    type: 'FETCH_RANDOM_IMAGE',
+    payload: null
+  }
+}
+
+export const getRandomQuote = () => {
+  return {
+    type: 'GET_RANDOM_QUOTE'
+  }
+}
+
+export const randomQuoteReceived = data => {
+  return {
+    type: 'RANDOM_QUOTE_RECEIVED',
+    payload: data
+  }
+}
