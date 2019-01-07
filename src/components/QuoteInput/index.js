@@ -3,24 +3,22 @@ import { QuoteContainer, Form, Input, Textarea } from './styled.js'
 
 class QuoteInput extends React.Component {
   state = {
-    image: '',
+    author: '',
     content: '',
-    author: '' ,
     errorMessage: ''
   }
 
   onQuoteSubmit = (event) => {
-    const { image, onSubmit } = this.props;
+    const { image, onSubmit, isRandom} = this.props;
     const { content, author } = this.state;
     event.preventDefault();
-  
-    if (!image) this.setState({ errorMessage: 'Please select an image' });
-    if (!content) this.setState({ errorMessage: 'Please provide some content' });
-    if (!author) this.setState({ errorMessage: 'Please provide an author' });
-    if (image && content && author) {
+    if (isRandom) {
+      onSubmit({image, content: this.props.content, author: this.props.author})
+      this.setState({ errorMessage: '' })
+    } else {
       onSubmit({image, content, author})
       this.setState({ errorMessage: '' })
-    };
+    }
   }
   
   render() {
@@ -28,15 +26,15 @@ class QuoteInput extends React.Component {
       <QuoteContainer image={this.props.image}>
         <Form onSubmit={this.onQuoteSubmit}>
           <Textarea
-            onChange={(e) => this.setState({ content: e.target.value })}
-            value={this.state.content} 
+            onChange={(e) => this.props.isRandom ? null : this.setState({ content: e.target.value })}
+            value={this.props.isRandom ? this.props.content : this.state.content} 
             type="text" 
             placeholder="Quote content"
             image={this.props.image}
           />
           <Input 
-            onChange={(e) => this.setState({ author: e.target.value})} 
-            value={this.state.author} 
+            onChange={(e) => this.props.isRandom ? null : this.setState({ author: e.target.value })} 
+            value={this.props.isRandom ? this.props.author : this.state.author} 
             type="text" 
             placeholder="Author"
             image={this.props.image}
