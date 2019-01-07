@@ -1,0 +1,1 @@
+export const getTerm = state => state.quotes.term

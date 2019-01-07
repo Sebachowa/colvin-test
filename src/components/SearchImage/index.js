@@ -1,14 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getImage, setTerm } from '../../actions'
 
 class SearchImage extends React.Component {
-  state = {
-    term: '',
-    selectedImage: ''
-  }
-
-  onFormSubmit = async (event) => {
+  
+  onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit(this.state.term)
+    this.props.getImage()
   }
 
   render() {
@@ -17,8 +15,8 @@ class SearchImage extends React.Component {
         <form onSubmit={this.onFormSubmit}>
           <input 
             type="text" 
-            value={this.state.term} 
-            onChange={e => this.setState({ term: e.target.value })}
+            value={this.props.term} 
+            onChange={e => this.props.setTerm(e.target.value)}
             onBlur={this.onFormSubmit}
             placeholder="Search image..." 
           />
@@ -29,4 +27,12 @@ class SearchImage extends React.Component {
   }
 }
 
-export default SearchImage
+const mapStateToProps = (state) => {
+  return {
+    term: state.term
+  }
+}
+
+const mapDispatchToProps = { getImage, setTerm } 
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchImage)

@@ -1,5 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import { QuoteContainer, Form, Input, Textarea } from './styled.js'
+import { addQuote } from './../../actions'
 
 class QuoteInput extends React.Component {
   state = {
@@ -9,14 +11,14 @@ class QuoteInput extends React.Component {
   }
 
   onQuoteSubmit = (event) => {
-    const { image, onSubmit, isRandom} = this.props;
+    const { image, isRandom } = this.props;
     const { content, author } = this.state;
     event.preventDefault();
     if (isRandom) {
-      onSubmit({image, content: this.props.content, author: this.props.author})
+      this.props.addQuote({image, content: this.props.content, author: this.props.author})
       this.setState({ errorMessage: '' })
     } else {
-      onSubmit({image, content, author})
+      this.props.addQuote({image, content, author})
       this.setState({ errorMessage: '' })
     }
   }
@@ -47,4 +49,8 @@ class QuoteInput extends React.Component {
   }
 }
 
-export default QuoteInput;
+const mapDispatchToProps = {
+  addQuote
+}
+
+export default connect(null, mapDispatchToProps)(QuoteInput);

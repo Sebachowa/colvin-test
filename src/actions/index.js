@@ -21,9 +21,17 @@ export const removeQuote = id => {
   }
 }
 
-export const getImage = () => {
+export const setTerm = term => {
   return {
-    type: 'GET_IMAGE'
+    type: 'SET_TERM',
+    payload: term
+  }
+}
+
+export const getImage = term => {
+  return {
+    type: 'GET_IMAGE',
+    payload: term
   }
 }
 
