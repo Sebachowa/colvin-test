@@ -10,6 +10,19 @@ class QuoteInput extends React.Component {
     errorMessage: ''
   }
 
+  getFontSize = () => {
+    const contentLength = this.state.content.length;
+    if (contentLength > 100) {
+      return '15px'
+    } else if (contentLength > 50) {
+      return '20px'
+    } else if (contentLength > 25) {
+      return '25px'
+    } else {
+      return '30px'
+    }
+  }
+
   onQuoteSubmit = (event) => {
     const { image, isRandom } = this.props;
     const { content, author } = this.state;
@@ -28,11 +41,13 @@ class QuoteInput extends React.Component {
       <QuoteContainer image={this.props.image}>
         <Form onSubmit={this.onQuoteSubmit}>
           <Textarea
+            ref='textArea'
             onChange={(e) => this.props.isRandom ? null : this.setState({ content: e.target.value })}
             value={this.props.isRandom ? this.props.content : this.state.content} 
             type="text" 
             placeholder="Quote content"
             image={this.props.image}
+            font={this.getFontSize}
           />
           <Input 
             onChange={(e) => this.props.isRandom ? null : this.setState({ author: e.target.value })} 

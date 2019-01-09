@@ -71,11 +71,10 @@ export const Textarea = styled.textarea`
     -moz-box-shadow: none;
     box-shadow: none;
     outline: none;
-    font-size: 30px;
+    font-size: ${props => props.font};
     text-align: center;
     resize: none;
     z-index: 3;
-    font-size: 30px;
     font-style: italic;
     text-align: center;
     color: ${props => props.image ? 'white' : 'black'};

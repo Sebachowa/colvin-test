@@ -38,11 +38,12 @@ const Sidebar = (props) => {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
-    quotes: state.quotes.quoteList,
+    quotes: state.quotes.list,
     image: state.quotes.image,
-    randomQuote: state.quotes.randomQuote,
-    randomImage: state.quotes.randomImage
+    randomQuote: state.randomQuote,
+    randomImage: state.randomImage
   }
 }
 
