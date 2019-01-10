@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import styled from "styled-components"
 
 import QuoteList from './QuoteList'
-import Sidebar from './Sidebar'
+import QuoteShow from "./QuoteShow";
 import Navbar from './Navbar'
 
 const Wrapper = styled.div`
@@ -18,13 +18,15 @@ const Content = styled.div`
 
 const App = () => {
   return (
-    <Wrapper>
-      <Navbar />
-      <Content>
-        <Sidebar />
-        <QuoteList />
-      </Content>
-    </Wrapper>
+    <Router>
+      <Wrapper>
+        <Navbar />
+          <Content>
+            <Route exact path="/" component={QuoteList} />
+            <Route path="/quotes/:id" component={QuoteShow} />
+          </Content>
+      </Wrapper>
+    </Router>
   )
 };
 

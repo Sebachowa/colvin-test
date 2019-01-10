@@ -14,6 +14,13 @@ export const editQuote = quote => {
   }
 }
 
+export const getQuote = id => {
+  return {
+    type: 'GET_QUOTE',
+    payload: id
+  }
+}
+
 export const removeQuote = id => {
   return {
     type: 'REMOVE_QUOTE',
@@ -39,6 +46,12 @@ export const ImageReceived = data => {
   return {
     type: 'IMAGE_RECEIVED',
     payload: data
+  }
+}
+
+export const removeImage = () => {
+  return {
+    type: 'REMOVE_IMAGE'
   }
 }
 

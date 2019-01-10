@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import QuoteCard from '../QuoteCard'
-import { List } from './styled.js'
+import HomeSidebar from '../HomeSidebar'
+import { List, Container } from './styled.js'
 
 class QuoteList extends Component {
   renderList = () => {
@@ -13,7 +14,10 @@ class QuoteList extends Component {
 
   render() {
     return (
-      <List>{this.renderList()}</List>
+      <Container>
+        <HomeSidebar />
+        <List>{this.renderList()}</List>
+      </Container>
     )
   }
 }

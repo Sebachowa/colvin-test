@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getImage, setTerm } from '../../actions'
+import { getImage, setTerm, removeImage } from '../../actions'
 import { FormContainer, Input, ImageContainer, Image, Button, Label } from './styled.js'
 import imagePlaceholder from './../../images/image-placeholder.png';
 
@@ -8,7 +8,11 @@ class SearchImage extends React.Component {
   
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.getImage()
+    if (this.props.term) {
+      this.props.getImage()
+    } else {
+      this.props.removeImage()
+    }
   }
 
   render() {
@@ -39,6 +43,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = { getImage, setTerm } 
+const mapDispatchToProps = { getImage, setTerm, removeImage } 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchImage)

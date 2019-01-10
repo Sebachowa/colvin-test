@@ -7,7 +7,7 @@ import QuoteInput from '../QuoteInput'
 import SearchImage from '../SearchImage'
 import RandomSelector from '../RandomSelector'
 
-const Sidebar = () => {
+const HomeSidebar = (props) => {
   return (
     <SidebarContainer>
       <Tabs defaultIndex={0}>
@@ -27,4 +27,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar;
+export default HomeSidebar;

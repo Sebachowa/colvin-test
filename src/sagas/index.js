@@ -2,6 +2,7 @@ import { put, takeLatest, all, select } from 'redux-saga/effects';
 import randomQuote from './../apis/randomQuote'
 import unsplash from './../apis/unsplash'
 import * as selectors from './selectors'
+import uuidv1 from 'uuid/v1';
 
 function* fetchRandomQuote() {
   const quoteResponse = yield randomQuote.get('/posts?filter[orderby]=rand&filter[posts_per_page]=1')
@@ -23,7 +24,9 @@ function* fetchRandomQuote() {
 
       return { image }
     })
-  yield put({ type: 'RANDOM_QUOTE_RECEIVED', payload: {...quoteResponse, ...imageResponse} })
+
+  const id = uuidv1()
+  yield put({ type: 'RANDOM_QUOTE_RECEIVED', payload: {...quoteResponse, ...imageResponse, id} })
 }
 
 

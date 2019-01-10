@@ -10,3 +10,10 @@ export const List = styled.div`
   flex-wrap: wrap;
   overflow: scroll;
 `;
+
+export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+`;
+
