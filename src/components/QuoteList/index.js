@@ -19,7 +19,6 @@ class QuoteList extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     quotes: state.quotes.list
   }

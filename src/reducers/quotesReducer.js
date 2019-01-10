@@ -7,7 +7,7 @@ export const initialState = {
 export const quotesReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_QUOTE':
-      return {...state, quoteList: [...state.list, action.payload]}
+      return {...state, list: [...state.list, action.payload]}
     case 'EDIT_QUOTE':
       return state.list.map(quote => quote.id === action.payload.id ? action.payload : quote);
     case 'REMOVE_QUOTE':

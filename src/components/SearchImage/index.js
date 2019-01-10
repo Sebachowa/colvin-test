@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getImage, setTerm } from '../../actions'
+import { FormContainer, Input, ImageContainer, Image, Button, Label } from './styled.js'
+import imagePlaceholder from './../../images/image-placeholder.png';
 
 class SearchImage extends React.Component {
   
@@ -10,18 +12,23 @@ class SearchImage extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
-        <form onSubmit={this.onFormSubmit}>
-          <input 
+        <ImageContainer>
+          <Image image={this.props.image} placeholder={imagePlaceholder} alt="" />
+        </ImageContainer> 
+        <Label>Image</Label>
+        <FormContainer onSubmit={this.onFormSubmit}>
+          <Input
             type="text" 
             value={this.props.term} 
             onChange={e => this.props.setTerm(e.target.value)}
-            onBlur={this.onFormSubmit}
-            placeholder="Search image..." 
+            // onBlur={this.onFormSubmit}
+            placeholder="angry, happy, people, etc..." 
           />
-          <input type="submit" value="Submit" />
-        </form>
+          <Button>Go</Button>
+        </FormContainer>
       </div>
     )
   }
@@ -29,7 +36,8 @@ class SearchImage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    term: state.term
+    term: state.quotes.term,
+    image: state.quotes.image
   }
 }
 

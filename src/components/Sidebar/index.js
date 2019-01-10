@@ -18,19 +18,10 @@ const Sidebar = (props) => {
         </TabList>
         <TabPanel>
           <SearchImage />
-          <QuoteInput
-            image={props.image}
-            isRandom={false}
-          />
+          <QuoteInput />
         </TabPanel>
         <TabPanel>
           <RandomSelector />
-          <QuoteInput
-            isRandom={true}
-            image={props.randomImage}
-            author={props.randomQuote.author}
-            content={props.randomQuote.content}
-          />
         </TabPanel>
       </Tabs>
     </SidebarContainer>
@@ -38,12 +29,11 @@ const Sidebar = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     quotes: state.quotes.list,
     image: state.quotes.image,
-    randomQuote: state.randomQuote,
-    randomImage: state.randomImage
+    randomQuote: state.randomQuote.randomQuote,
+    randomImage: state.randomQuote.randomImage
   }
 }
 

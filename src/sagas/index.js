@@ -47,7 +47,6 @@ function* actionWatcher() {
   yield takeLatest('GET_RANDOM_QUOTE', fetchRandomQuote)
   yield takeLatest('GET_RANDOM_IMAGE', fetchRandomImage)
   yield takeLatest('GET_IMAGE', fetchImage)
-
 }
 
 export default function* rootSaga() {

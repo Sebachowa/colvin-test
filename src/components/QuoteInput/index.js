@@ -1,71 +1,114 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { QuoteContainer, Form, Input, Textarea } from './styled.js'
+import { Field, reduxForm} from 'redux-form';
 import { addQuote } from './../../actions'
+import { FormContainer, Form, Input, Textarea, Button, ErrorContainer, Error, Label } from './styled.js'
 
 class QuoteInput extends React.Component {
-  state = {
-    author: '',
-    content: '',
-    errorMessage: ''
+  onSubmit = (formValues) => {
+    this.props.addQuote(formValues)
   }
 
-  getFontSize = () => {
-    const contentLength = this.state.content.length;
-    if (contentLength > 100) {
-      return '15px'
-    } else if (contentLength > 50) {
-      return '20px'
-    } else if (contentLength > 25) {
-      return '25px'
-    } else {
-      return '30px'
+  renderError({ error, touched}) {
+    if ( touched && error) {
+      return (
+        <Error>{error}</Error>
+      )
     }
   }
 
-  onQuoteSubmit = (event) => {
-    const { image, isRandom } = this.props;
-    const { content, author } = this.state;
-    event.preventDefault();
-    if (isRandom) {
-      this.props.addQuote({image, content: this.props.content, author: this.props.author})
-      this.setState({ errorMessage: '' })
-    } else {
-      this.props.addQuote({image, content, author})
-      this.setState({ errorMessage: '' })
-    }
+  renderTextArea = ({ input, meta }) => {
+    return (
+      <div>
+        <Label>{input.name.charAt(0).toUpperCase() + input.name.slice(1)}</Label>
+        <Textarea
+          {...input}
+          placeholder="I know that I know nothing"
+          image={this.props.image}
+          font={this.getFontSize}
+          type="text"
+          value={this.props.randomContent}
+        />
+        <ErrorContainer>
+          {this.renderError(meta)}
+        </ErrorContainer>
+      </div>
+    )
+  }
+
+  renderInput = ({ input, meta }) => {
+    return (
+      <div>
+        <Label>{input.name.charAt(0).toUpperCase() + input.name.slice(1)}</Label>
+        <Input 
+          {...input} 
+          placeholder="Plato" 
+          image={this.props.image} 
+          autoComplete="off"
+          value={this.props.randomAuthor} 
+        />
+        <ErrorContainer>
+          {this.renderError(meta)}
+        </ErrorContainer>
+      </div>
+    )
+  }
+
+  renderImage = ({ input, meta }) => {
+      this.props.change('image', this.props.image);
+    return (
+      <div>
+        <input
+          {...input}
+          type="hidden"
+        />
+        <ErrorContainer>
+          {this.renderError(meta)}
+        </ErrorContainer>
+      </div>
+    )
   }
   
   render() {
     return (
-      <QuoteContainer image={this.props.image}>
-        <Form onSubmit={this.onQuoteSubmit}>
-          <Textarea
-            ref='textArea'
-            onChange={(e) => this.props.isRandom ? null : this.setState({ content: e.target.value })}
-            value={this.props.isRandom ? this.props.content : this.state.content} 
-            type="text" 
-            placeholder="Quote content"
-            image={this.props.image}
-            font={this.getFontSize}
-          />
-          <Input 
-            onChange={(e) => this.props.isRandom ? null : this.setState({ author: e.target.value })} 
-            value={this.props.isRandom ? this.props.author : this.state.author} 
-            type="text" 
-            placeholder="Author"
-            image={this.props.image}
-          />
-          <input type="submit"/>
+      <FormContainer image={this.props.image}>
+        <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <Field name="image" image={this.props.image} component={this.renderImage}/>
+          <Field name="content" component={this.renderTextArea} />
+          <Field name="author" component={this.renderInput} />
+          <Button>Add quote</Button>
         </Form>
-        <p>{this.state.errorMessage}</p>
-      </QuoteContainer>
+      </FormContainer>
     )
   }
 }
 
-const mapDispatchToProps = {
-  addQuote
+const validate = (formValues) => {
+  const errors = {}
+  if (!formValues.content) {
+    errors.content = "Please write something!";
+  }
+
+  if (!formValues.author) {
+    errors.author = "Please enter an author!";
+  }
+
+  if (!formValues.image) {
+    errors.image = "Please selected an image!";
+  } 
+
+  return errors;
 }
 
-export default connect(null, mapDispatchToProps)(QuoteInput);
+const mapStateToProps = (state) => {
+  return {
+    image: state.quotes.image
+  }
+}
+
+const formWrapped = reduxForm({
+  form: 'quoteCreate',
+  validate
+})(QuoteInput)
+
+export default connect(mapStateToProps, { addQuote })(formWrapped)
