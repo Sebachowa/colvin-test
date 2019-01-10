@@ -12,7 +12,6 @@ class SearchImage extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <ImageContainer>
@@ -24,8 +23,7 @@ class SearchImage extends React.Component {
             type="text" 
             value={this.props.term} 
             onChange={e => this.props.setTerm(e.target.value)}
-            // onBlur={this.onFormSubmit}
-            placeholder="angry, happy, people, etc..." 
+            placeholder="angry, happy, people, party, etc..." 
           />
           <Button>Go</Button>
         </FormContainer>

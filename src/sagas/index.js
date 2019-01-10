@@ -7,7 +7,7 @@ function* fetchRandomQuote() {
   const quoteResponse = yield randomQuote.get('/posts?filter[orderby]=rand&filter[posts_per_page]=1')
     .then((result) => {
       let content = result.data[0].content
-      content = content.slice(0, 50)
+      content = content.slice(0, 100)
       content = content.replace('<p>', "")
       content = content.replace('</p>', "")
       const author = result.data[0].title

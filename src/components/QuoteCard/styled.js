@@ -37,10 +37,9 @@ export const QuoteContent = styled.div`
 export const QuoteBody = styled.h1`
   width: 80%;
   font-size: 30px;
-  font-weight: lighter;
-  font-style: italic;
   text-align: center;
   color: white;
+  font-family: 'Bad Script', cursive;
 `;
 
 export const QuoteAuthor = styled.h1`
@@ -48,4 +47,8 @@ export const QuoteAuthor = styled.h1`
   margin-top: 20px;
   font-size: 20px;
   text-align: right;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-family: 'Dosis', sans-serif;
 `;
