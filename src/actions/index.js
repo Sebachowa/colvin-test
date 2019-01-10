@@ -42,19 +42,6 @@ export const ImageReceived = data => {
   }
 }
 
-export const getRandomImage = () => {
-  return {
-    type: 'GET_RANDOM_IMAGE'
-  }
-}
-
-export const randomImageReceived = data => {
-  return {
-    type: 'RANDOM_IMAGE_RECEIVED',
-    payload: data
-  }
-}
-
 export const getRandomQuote = () => {
   return {
     type: 'GET_RANDOM_QUOTE'

@@ -16,6 +16,8 @@ export const quotesReducer = (state = initialState, action) => {
       return { ...state, term: action.payload }
     case 'IMAGE_RECEIVED':
       return { ...state, image: action.payload }
+    case 'RANDOM_QUOTE_RECEIVED':
+      return { ...state, list: [...state.list, action.payload] }
     default:
       return state
   }

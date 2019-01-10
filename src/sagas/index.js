@@ -4,29 +4,28 @@ import unsplash from './../apis/unsplash'
 import * as selectors from './selectors'
 
 function* fetchRandomQuote() {
-  const response = yield randomQuote.get('/posts?filter[orderby]=rand&filter[posts_per_page]=1')
-    .then(result => {
+  const quoteResponse = yield randomQuote.get('/posts?filter[orderby]=rand&filter[posts_per_page]=1')
+    .then((result) => {
       let content = result.data[0].content
       content = content.slice(0, 50)
       content = content.replace('<p>', "")
       content = content.replace('</p>', "")
-      let author = result.data[0].title
+      const author = result.data[0].title
       return { content, author }
     })
-
-  yield put({ type: 'RANDOM_QUOTE_RECEIVED', payload: response })
-}
-
-function* fetchRandomImage() {
-  const response = yield unsplash.get('/photos/random', {
+  
+  const imageResponse = yield unsplash.get('/photos/random', {
     params: { orientation: 'squarish' },
-    headers: { Authorization: 'Client-ID caf295221fb949ce9661404707301ecbf00021083633bd3e5e3827278b3fef54'}
+    headers: { Authorization: 'Client-ID caf295221fb949ce9661404707301ecbf00021083633bd3e5e3827278b3fef54' }
   })
-    .then((result) => {
-      return result.data.urls.regular
+    .then((result)=> {
+      const image = result.data.urls.regular
+
+      return { image }
     })
-  yield put({ type: 'RANDOM_IMAGE_RECEIVED', payload: response })
+  yield put({ type: 'RANDOM_QUOTE_RECEIVED', payload: {...quoteResponse, ...imageResponse} })
 }
+
 
 function* fetchImage() {
   const term = yield select(selectors.getTerm)
@@ -45,7 +44,6 @@ function* fetchImage() {
 
 function* actionWatcher() {
   yield takeLatest('GET_RANDOM_QUOTE', fetchRandomQuote)
-  yield takeLatest('GET_RANDOM_IMAGE', fetchRandomImage)
   yield takeLatest('GET_IMAGE', fetchImage)
 }
 
