@@ -8,6 +8,7 @@ import { Container, CardContainer, Card, QuoteContent, QuoteBody, QuoteAuthor } 
 
 
 class QuoteShow extends React.Component {
+  
   componentDidMount() {
     const { quotesLength, history, getQuote, match } = this.props;
     if (!quotesLength) {
