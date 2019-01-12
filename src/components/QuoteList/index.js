@@ -5,21 +5,17 @@ import QuoteCard from '../QuoteCard'
 import HomeSidebar from '../HomeSidebar'
 import { List, Container } from './styled.js'
 
-class QuoteList extends Component {
-  renderList = () => {
-    return this.props.quotes.map((quote) => {
-      return <QuoteCard key={quote.id} quote={quote} />
-    })
-  }
-
-  render() {
-    return (
-      <Container>
-        <HomeSidebar />
-        <List>{this.renderList()}</List>
-      </Container>
-    )
-  }
+const QuoteList = (props) => {
+  return (
+    <Container>
+      <HomeSidebar />
+      <List>
+        {props.quotes.map((quote) => {
+          return <QuoteCard key={quote.id} quote={quote} />
+        })}
+      </List>
+    </Container>
+  )
 }
 
 const mapStateToProps = state => {
