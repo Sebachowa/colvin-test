@@ -1,4 +1,5 @@
 import { put, takeLatest, all, select } from 'redux-saga/effects';
+import { parseQuoteContent, getRandomImage } from './../helpers'
 import randomQuote from './../apis/randomQuote'
 import unsplash from './../apis/unsplash'
 import * as selectors from './selectors'
@@ -7,12 +8,9 @@ import uuidv1 from 'uuid/v1';
 function* fetchRandomQuote() {
   const quoteResponse = yield randomQuote.get('/posts?filter[orderby]=rand&filter[posts_per_page]=1')
     .then((result) => {
-      let content = result.data[0].content
-      content = content.slice(0, 100)
-      content = content.replace('<p>', "")
-      content = content.replace('</p>', "")
+      const parsedContent = parseQuoteContent(result.data[0].content)
       const author = result.data[0].title
-      return { content, author }
+      return { parsedContent, author }
     })
   
   const imageResponse = yield unsplash.get('/photos/random', {
@@ -21,7 +19,6 @@ function* fetchRandomQuote() {
   })
     .then((result)=> {
       const image = result.data.urls.regular
-
       return { image }
     })
 
@@ -38,8 +35,8 @@ function* fetchImage() {
   })
   .then((result) => {
     if (result.data.results.length) {
-      const randomImage = result.data.results[Math.floor(Math.random() * result.data.results.length)]
-      return randomImage.urls.regular
+      const randomImage = getRandomImage(result.data.results)
+      return randomImage 
     }
   })
   yield put({ type: 'IMAGE_RECEIVED', payload: response})
