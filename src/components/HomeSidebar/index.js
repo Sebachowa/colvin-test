@@ -3,11 +3,11 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import { SidebarContainer } from './styled.js'
-import QuoteInput from '../QuoteInput'
+import QuoteForm from '../QuoteForm'
 import SearchImage from '../SearchImage'
 import RandomSelector from '../RandomSelector'
 
-const HomeSidebar = (props) => {
+const HomeSidebar = () => {
   return (
     <SidebarContainer>
       <Tabs defaultIndex={0}>
@@ -17,7 +17,7 @@ const HomeSidebar = (props) => {
         </TabList>
         <TabPanel>
           <SearchImage />
-          <QuoteInput />
+          <QuoteForm />
         </TabPanel>
         <TabPanel>
           <RandomSelector />
