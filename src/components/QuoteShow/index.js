@@ -9,21 +9,23 @@ import { Container, CardContainer, Card, QuoteContent, QuoteBody, QuoteAuthor } 
 
 class QuoteShow extends React.Component {
   componentDidMount() {
-    if (!this.props.quotesLength) {
-      this.props.history.push('/')
+    const { quotesLength, history, getQuote, match } = this.props;
+    if (!quotesLength) {
+      history.push('/')
     } 
-    this.props.getQuote(this.props.match.params.id)
+    getQuote(match.params.id)
   }
 
   render () {
+    const { image, content, author } = this.props.quote;
     return (
       <Container>
         <ShowSidebar />
         { this.props.quote ? <CardContainer>
-            <Card image={this.props.quote.image}>
+            <Card image={image}>
               <QuoteContent>
-                <QuoteBody>{this.props.quote.content}</QuoteBody>
-                <QuoteAuthor>{this.props.quote.author}</QuoteAuthor>
+                <QuoteBody>{content}</QuoteBody>
+                <QuoteAuthor>{author}</QuoteAuthor>
               </QuoteContent>
             </Card>
           </CardContainer> : null

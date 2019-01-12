@@ -7,26 +7,28 @@ import imagePlaceholder from './../../images/image-placeholder.png';
 class SearchImage extends React.Component {
   
   onFormSubmit = (event) => {
+    const { term, getImage, removeImage } = this.props;
     event.preventDefault();
-    if (this.props.term) {
-      this.props.getImage()
+    if (term) {
+      getImage()
     } else {
-      this.props.removeImage()
+      removeImage()
     }
   }
 
   render() {
+    const { image, term, setTerm } = this.props;
     return (
       <div>
         <ImageContainer>
-          <Image image={this.props.image} placeholder={imagePlaceholder} alt="" />
+          <Image image={image} placeholder={imagePlaceholder} alt="" />
         </ImageContainer> 
         <Label>Image</Label>
         <FormContainer onSubmit={this.onFormSubmit}>
           <Input
             type="text" 
-            value={this.props.term} 
-            onChange={e => this.props.setTerm(e.target.value)}
+            value={term} 
+            onChange={e => setTerm(e.target.value)}
             placeholder="angry, happy, people, party, etc..." 
           />
           <Button>Go</Button>
