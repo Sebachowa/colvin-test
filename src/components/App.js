@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import styled from "styled-components"
-
 import QuoteList from './QuoteList'
 import QuoteShow from "./QuoteShow";
 import Navbar from './Navbar'

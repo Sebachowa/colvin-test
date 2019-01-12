@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ButtonContainer, Button } from './styled.js'
 import { getRandomQuote } from '../../actions'
+import { ButtonContainer, Button } from './styled.js'
 
 
 const RandomSelector = (props) => {

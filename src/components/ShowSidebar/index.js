@@ -1,10 +1,10 @@
-import './tabStyle.css';
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ShowOptions from './../ShowOptions'
+import './tabStyle.css';
 import { SidebarContainer } from './styled.js'
 
-const ShowSidebar = (props) => {
+const ShowSidebar = () => {
   return (
     <SidebarContainer>
       <Tabs>

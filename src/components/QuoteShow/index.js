@@ -1,11 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getQuote } from '../../actions'
-
 import ShowSidebar from './../ShowSidebar'
-
 import { Container, CardContainer, Card, QuoteContent, QuoteBody, QuoteAuthor } from './styled.js'
-
 
 class QuoteShow extends React.Component {
   

@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-
 import QuoteCard from '../QuoteCard'
 import HomeSidebar from '../HomeSidebar'
 import { List, Container } from './styled.js'

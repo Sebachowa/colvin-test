@@ -1,11 +1,10 @@
-import './tabStyle.css';
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-
-import { SidebarContainer } from './styled.js'
 import QuoteForm from '../QuoteForm'
 import SearchImage from '../SearchImage'
 import RandomSelector from '../RandomSelector'
+import './tabStyle.css';
+import { SidebarContainer } from './styled.js'
 
 const HomeSidebar = () => {
   return (

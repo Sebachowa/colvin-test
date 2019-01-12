@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-
 import { Card, QuoteContent,QuoteBody, QuoteAuthor } from './styled.js'
 
 const QuoteCard = (props) => {
