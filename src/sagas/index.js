@@ -8,9 +8,9 @@ import uuidv1 from 'uuid/v1';
 function* fetchRandomQuote() {
   const quoteResponse = yield randomQuote.get('/posts?filter[orderby]=rand&filter[posts_per_page]=1')
     .then((result) => {
-      const parsedContent = parseQuoteContent(result.data[0].content)
+      const content = parseQuoteContent(result.data[0].content)
       const author = result.data[0].title
-      return { parsedContent, author }
+      return { content, author }
     })
   
   const imageResponse = yield unsplash.get('/photos/random', {
@@ -36,6 +36,7 @@ function* fetchImage() {
   .then((result) => {
     if (result.data.results.length) {
       const randomImage = getRandomImage(result.data.results)
+      console.log(randomImage)
       return randomImage 
     }
   })

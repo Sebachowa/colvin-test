@@ -6,5 +6,5 @@ export const parseQuoteContent = (string) => {
 }
 
 export const getRandomImage = (array) => {
-  return array[Math.floor(Math.random() * array.length)]
+  return array[Math.floor(Math.random() * array.length)].urls.regular
 }
