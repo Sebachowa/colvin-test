@@ -5,8 +5,37 @@ export const CardContainer = styled.div`
   height: 100%;
   padding: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
+`;
+
+export const MessageContainer = styled.div`
+  width: 100%;
+  text-align: center;
+  height: 50px;
+`; 
+
+export const ButtonContainer = styled.div`
+  width: 100%;
+  text-align: center;
+  height: 50px;
+`;
+
+export const Button = styled.button`
+  width: 80px;
+  border-radius: 5px;
+  border: none;
+  line-height: 40px;
+  background-color: lightgray;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 2px 20px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+  :hover {
+    box-shadow: 0px 0px 20px rgba(0,0,0,0);
+    color: #067bc2;
+  }
 `;
 
 export const Card = styled.div`
@@ -49,6 +78,9 @@ export const QuoteBody = styled.h1`
   text-align: center;
   color: white;
   font-family: 'Bad Script', cursive;
+  border: 1px solid transparent;
+  padding: 5px;
+  outline: none;
 `;
 
 export const QuoteAuthor = styled.h1`
@@ -60,7 +92,8 @@ export const QuoteAuthor = styled.h1`
   position: absolute;
   bottom: 20px;
   right: 20px;
-  font-family: 'Dosis', sans-serif;
+  padding: 5px;
+  outline: none;
 `;
 
 export const Container = styled.div`

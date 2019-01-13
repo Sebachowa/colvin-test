@@ -6,11 +6,12 @@ const QuoteCard = (props) => {
   const { content, image, author, id } = props.quote;
   return (
     <Card image={image}>
-      <QuoteContent>
-        <QuoteBody>{content}</QuoteBody>
-        <QuoteAuthor>{author}</QuoteAuthor>
-        <Link to={`/quotes/${id}`}>CLICK</Link>
-      </QuoteContent>
+      <Link to={`/quotes/${id}`}>
+        <QuoteContent>
+          <QuoteBody>{content}</QuoteBody>
+          <QuoteAuthor>{author}</QuoteAuthor>
+        </QuoteContent>
+      </Link>
     </Card>
   )
 }

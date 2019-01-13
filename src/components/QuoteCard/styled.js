@@ -10,6 +10,7 @@ export const Card = styled.div`
   height: 400px;
   position: relative;
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
   :after {
     content: "";
     position: absolute;
@@ -17,6 +18,9 @@ export const Card = styled.div`
     background: rgba(0,0,0,0.5);
     pointer-events: none;
     z-index: 2;
+  }
+  :hover {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
   }
 `;
 
@@ -52,3 +56,4 @@ export const QuoteAuthor = styled.h1`
   right: 20px;
   font-family: 'Dosis', sans-serif;
 `;
+

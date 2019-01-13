@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ButtonContainer = styled.form`
+export const ButtonContainer = styled.div`
   margin: 0 auto;
   width: 100%;
   display: flex;

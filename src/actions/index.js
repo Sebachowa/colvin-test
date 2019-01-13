@@ -4,8 +4,8 @@ export const addQuote = quote => {
   return {
     type: 'ADD_QUOTE',
     payload: { ...quote, id: uuidv1() }
-  };
-};
+  }
+}
 
 export const editQuote = quote => {
   return {
@@ -67,3 +67,15 @@ export const randomQuoteReceived = data => {
     payload: data
   }
 }
+
+export const setEditMode = () => {
+  return {
+    type: 'SET_EDIT_MODE'
+  }
+}
+
+export const setNormalMode = () => {
+  return {
+    type: 'SET_NORMAL_MODE'
+  }
+} 
