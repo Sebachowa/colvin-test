@@ -4,7 +4,7 @@ import ShowOptions from './../ShowOptions'
 import './tabStyle.css';
 import { SidebarContainer } from './styled.js'
 
-const ShowSidebar = () => {
+const ShowSidebar = props => {
   return (
     <SidebarContainer>
       <Tabs>
@@ -12,7 +12,7 @@ const ShowSidebar = () => {
           <Tab>Options</Tab>
         </TabList>
         <TabPanel>
-          <ShowOptions />
+          <ShowOptions onExportToPDF={props.onExportToPDF} />
         </TabPanel>
       </Tabs>
     </SidebarContainer>

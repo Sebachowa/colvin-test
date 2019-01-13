@@ -29,14 +29,17 @@ export const Button = styled.button`
   line-height: 40px;
   background-color: lightgray;
   cursor: pointer;
+  margin: 0 20px;
   transition: all 0.3s ease;
   box-shadow: 0px 2px 20px rgba(0,0,0,0.2);
+  color: ${props => props.danger ? 'red' : 'green'};
   margin-bottom: 20px;
   :hover {
     box-shadow: 0px 0px 20px rgba(0,0,0,0);
     color: #067bc2;
   }
 `;
+
 
 export const Card = styled.div`
   background-color: white;

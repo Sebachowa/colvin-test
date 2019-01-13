@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getQuote, editQuote, setNormalMode } from '../../actions'
+import html2canvas from 'html2canvas'
+import * as jsPDF from 'jspdf'
+import { getQuote, editQuote, setNormalMode, removeQuote } from '../../actions'
 import ShowSidebar from './../ShowSidebar'
 import { Container, CardContainer, MessageContainer, ButtonContainer, Button, Card, QuoteContent, QuoteBody, QuoteAuthor } from './styled.js'
 
@@ -26,23 +28,70 @@ class QuoteShow extends React.Component {
     this.props.setNormalMode()
   }
 
+  onQuoteRemove = () => {
+    const id = this.props.match.params.id
+    this.props.removeQuote(id)
+    this.props.setNormalMode()
+    this.props.history.push('/')
+  }
+
+  renderMessage = () => {
+    if (this.props.isEdit) {
+      return <h3>Click the text to edit the quote</h3>
+    }
+
+    if (this.props.isDelete) {
+      return (
+        <div>
+          <h3>Are you sure you want to delete this quote?</h3>
+          <Button danger onClick={this.onQuoteRemove}>Yes</Button>
+          <Button onClick={() => this.props.setNormalMode()}>No</Button>
+        </div>
+      )
+    }
+    return null
+  }
+
+  renderSaveButton = () => {
+    if (this.props.isEdit) {
+      return <Button onClick={this.submitEditedQuote}>Save</Button>
+    }
+    return null;
+  }
+
+  exportToPDF() {
+    const card = document.getElementById('card');
+
+    html2canvas(card, { 
+      logging: true,
+      useCORS: true,
+      taintTest : true
+    })
+    .then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, 'JPEG', 25, 25);
+      pdf.save("download.pdf");
+    })
+  }
+  
   render () {
     const { image, content, author } = this.props.quote;
     return (
       <Container>
-        <ShowSidebar />
+        <ShowSidebar onExportToPDF={this.exportToPDF}/>
         { this.props.quote ? <CardContainer>
             <MessageContainer>
-              { this.props.isEdit ? <h3>Click the text to edit the quote</h3> : null}
+              {this.renderMessage()}
             </MessageContainer>
-            <Card image={image}>
+            <Card id="card" image={image}>
               <QuoteContent>
                 <QuoteBody ref={this.content} contentEditable={this.props.isEdit}>{content}</QuoteBody>
                 <QuoteAuthor ref={this.author} contentEditable={this.props.isEdit}>{author}</QuoteAuthor>
               </QuoteContent>
             </Card>
             <ButtonContainer>
-              { this.props.isEdit ? <Button onClick={this.submitEditedQuote}>Save</Button> : null }
+              {this.renderSaveButton()}
             </ButtonContainer>
           </CardContainer> : null
         }
@@ -55,14 +104,16 @@ const mapStateToProps = (state) => {
   return {
     quotesLength: state.quotes.list.length,
     quote: state.quotes.selectedQuote,
-    isEdit: state.quotes.isEdit
+    isEdit: state.quotes.isEdit,
+    isDelete: state.quotes.isDelete
   }
 }
 
 const mapDispatchToProps = {
   getQuote,
   editQuote,
-  setNormalMode
+  setNormalMode,
+  removeQuote
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuoteShow)

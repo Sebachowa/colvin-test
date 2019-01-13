@@ -74,6 +74,12 @@ export const setEditMode = () => {
   }
 }
 
+export const setDeleteMode = () => {
+  return {
+    type: 'SET_DELETE_MODE'
+  }
+}
+
 export const setNormalMode = () => {
   return {
     type: 'SET_NORMAL_MODE'

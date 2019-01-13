@@ -3,7 +3,8 @@ export const INITIAL_STATE = {
   term: '',
   image: '',
   selectedQuote: {},
-  isEdit: false
+  isEdit: false,
+  isDelete: false
 }
 
 export const quotesReducer = (state = INITIAL_STATE, action) => {
@@ -25,9 +26,11 @@ export const quotesReducer = (state = INITIAL_STATE, action) => {
     case 'RANDOM_QUOTE_RECEIVED':
       return { ...state, list: [ ...state.list, action.payload ] }
     case 'SET_EDIT_MODE':
-      return { ...state, isEdit: true}
+      return { ...state, isEdit: true, isDelete: false}
+    case 'SET_DELETE_MODE':
+      return { ...state, isEdit: false, isDelete: true}
     case 'SET_NORMAL_MODE':
-      return { ...state, isEdit: false}
+      return { ...state, isEdit: false, isDelete: false}
     default:
       return state
   }
