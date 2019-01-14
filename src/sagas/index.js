@@ -36,7 +36,6 @@ function* fetchImage() {
   .then((result) => {
     if (result.data.results.length) {
       const randomImage = getRandomImage(result.data.results)
-      console.log(randomImage)
       return randomImage 
     }
   })

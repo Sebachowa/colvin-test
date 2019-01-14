@@ -4,8 +4,7 @@ import html2canvas from 'html2canvas'
 import * as jsPDF from 'jspdf'
 import { getQuote, editQuote, setNormalMode, removeQuote } from '../../actions'
 import ShowSidebar from './../ShowSidebar'
-import BackButton from './../BackButton'
-import { Container, CardContainer, MessageContainer, ButtonContainer, Button, Card, QuoteContent, QuoteBody, QuoteAuthor } from './styled.js'
+import { Container, CardContainer, MessageContainer, ButtonContainer, Button, Card, QuoteContent, QuoteBody, QuoteAuthor, BackButton } from './styled.js'
 
 class QuoteShow extends React.Component {
   content = React.createRef();
@@ -69,7 +68,6 @@ class QuoteShow extends React.Component {
       taintTest: true
     })
     .then((canvas) => {
-      console.log(canvas)
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
       
@@ -78,24 +76,38 @@ class QuoteShow extends React.Component {
     })
   }
 
-  goBack = () => {
-    this.props.history.goBack()
+  back = event => {
+    const { history } = this.props
+    history.goBack()
   }
   
   render () {
-    const { image, content, author, isEdit } = this.props.quote;
+    const { image, content, author } = this.props.quote;
+    
     return (
       <Container>
         <ShowSidebar onExportToPDF={this.exportToPDF}/>
-        <BackButton onGoBack={this.goBack}/>
         { this.props.quote ? <CardContainer>
+            <BackButton onClick={this.back}>Back</BackButton>
             <MessageContainer>
               {this.renderMessage()}
             </MessageContainer>
             <Card id="card" image={image}>
               <QuoteContent>
-                <QuoteBody ref={this.content} contentEditable={isEdit}>{content}</QuoteBody>
-                <QuoteAuthor ref={this.author} contentEditable={isEdit}>{author}</QuoteAuthor>
+              <QuoteBody 
+                ref={this.content} 
+                suppressContentEditableWarning="true" 
+                contentEditable={this.props.isEdit}
+              >
+                {content}
+              </QuoteBody>
+              <QuoteAuthor 
+                ref={this.author} 
+                suppressContentEditableWarning="true" 
+                contentEditable={this.props.isEdit}
+              >
+                {author}
+              </QuoteAuthor>
               </QuoteContent>
             </Card>
             <ButtonContainer>
