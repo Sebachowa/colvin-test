@@ -8,3 +8,7 @@ export const parseQuoteContent = (string) => {
 export const getRandomImage = (array) => {
   return array[Math.floor(Math.random() * array.length)].urls.regular
 }
+
+export const capitalizeString = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}

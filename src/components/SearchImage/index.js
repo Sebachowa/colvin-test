@@ -7,13 +7,9 @@ import imagePlaceholder from './../../images/image-placeholder.png';
 class SearchImage extends React.Component {
   
   onFormSubmit = (event) => {
-    const { term, getImage, removeImage } = this.props;
     event.preventDefault();
-    if (term) {
-      getImage()
-    } else {
-      removeImage()
-    }
+    const { term, getImage, removeImage } = this.props;
+    term ? getImage() : removeImage()
   }
 
   render() {

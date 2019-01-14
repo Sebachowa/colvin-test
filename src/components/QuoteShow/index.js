@@ -76,7 +76,7 @@ class QuoteShow extends React.Component {
     })
   }
 
-  back = event => {
+  back = () => {
     const { history } = this.props
     history.goBack()
   }

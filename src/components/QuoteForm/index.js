@@ -1,33 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+
 import { addQuote } from './../../actions'
 import { FormContainer, Form, Input, Textarea, Button, ErrorContainer, Error, Label } from './styled.js'
+import { capitalizeString } from './../../helpers'
 
 class QuoteInput extends React.Component {
   onSubmit = (formValues) => {
     this.props.addQuote(formValues)
+    this.props.reset()
   }
 
   renderError({ error, touched}) {
-    if ( touched && error) {
-      return (
-        <Error>{error}</Error>
-      )
+    if (touched && error) {
+      return <Error>{error}</Error>
     }
   }
 
   renderTextArea = ({ input, meta }) => {
     return (
       <div>
-        <Label>{input.name.charAt(0).toUpperCase() + input.name.slice(1)}</Label>
+        <Label>{capitalizeString(input.name)}</Label>
         <Textarea
           {...input}
           placeholder="I know that I know nothing"
           image={this.props.image}
           font={this.getFontSize}
           type="text"
-          value={this.props.randomContent}
         />
         <ErrorContainer>
           {this.renderError(meta)}
@@ -39,13 +39,12 @@ class QuoteInput extends React.Component {
   renderInput = ({ input, meta }) => {
     return (
       <div>
-        <Label>{input.name.charAt(0).toUpperCase() + input.name.slice(1)}</Label>
+        <Label>{capitalizeString(input.name)}</Label>
         <Input 
           {...input} 
           placeholder="Plato" 
           image={this.props.image} 
           autoComplete="off"
-          value={this.props.randomAuthor} 
         />
         <ErrorContainer>
           {this.renderError(meta)}
@@ -55,7 +54,7 @@ class QuoteInput extends React.Component {
   }
 
   renderImage = ({ input, meta }) => {
-      this.props.change('image', this.props.image);
+    this.props.change('image', this.props.image);
     return (
       <div>
         <input
