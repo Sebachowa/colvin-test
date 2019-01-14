@@ -32,6 +32,7 @@
   - SearchImage
   - ShowOptions
   - ShowSidebar
+  - BackButton
 
 ## Actions
 

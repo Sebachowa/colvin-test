@@ -4,6 +4,7 @@ import html2canvas from 'html2canvas'
 import * as jsPDF from 'jspdf'
 import { getQuote, editQuote, setNormalMode, removeQuote } from '../../actions'
 import ShowSidebar from './../ShowSidebar'
+import BackButton from './../BackButton'
 import { Container, CardContainer, MessageContainer, ButtonContainer, Button, Card, QuoteContent, QuoteBody, QuoteAuthor } from './styled.js'
 
 class QuoteShow extends React.Component {
@@ -74,12 +75,17 @@ class QuoteShow extends React.Component {
       pdf.save("download.pdf");
     })
   }
+
+  goBack = () => {
+    this.props.history.goBack()
+  }
   
   render () {
     const { image, content, author, isEdit } = this.props.quote;
     return (
       <Container>
         <ShowSidebar onExportToPDF={this.exportToPDF}/>
+        <BackButton onGoBack={this.goBack}/>
         { this.props.quote ? <CardContainer>
             <MessageContainer>
               {this.renderMessage()}
