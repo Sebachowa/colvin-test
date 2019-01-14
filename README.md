@@ -49,4 +49,3 @@
 
 ## Links
   - [Client repository Link](http://github.com/sebachowa/colvin-test)
-  - [Deploy Link](http://heroku.com)
