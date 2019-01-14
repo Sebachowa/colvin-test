@@ -4,7 +4,6 @@ import { setEditMode, setDeleteMode } from './../../actions'
 import { ButtonContainer, Button } from './styled'
 
 const ShowOptions = props => {
-  console.log(props)
     return (
       <ButtonContainer>
         <Button onClick={props.onExportToPDF}>Export as PDF</Button>

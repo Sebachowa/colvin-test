@@ -6,7 +6,9 @@ import { NavbarContainer, Logo, Counter } from './styled.js'
 const Navbar = (props) => {
   return (
     <NavbarContainer>
-      <Logo><Link to={'/'}>Quote Maker</Link></Logo>
+      <Link to={'/'}>
+        <Logo>Quote Maker</Logo>
+      </Link>
       <Counter>Quotes: {props.quotesLength}</Counter>
     </NavbarContainer>
   )

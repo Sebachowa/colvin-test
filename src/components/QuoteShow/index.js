@@ -76,7 +76,7 @@ class QuoteShow extends React.Component {
   }
   
   render () {
-    const { image, content, author } = this.props.quote;
+    const { image, content, author, isEdit } = this.props.quote;
     return (
       <Container>
         <ShowSidebar onExportToPDF={this.exportToPDF}/>
@@ -86,8 +86,8 @@ class QuoteShow extends React.Component {
             </MessageContainer>
             <Card id="card" image={image}>
               <QuoteContent>
-                <QuoteBody ref={this.content} contentEditable={this.props.isEdit}>{content}</QuoteBody>
-                <QuoteAuthor ref={this.author} contentEditable={this.props.isEdit}>{author}</QuoteAuthor>
+                <QuoteBody ref={this.content} contentEditable={isEdit}>{content}</QuoteBody>
+                <QuoteAuthor ref={this.author} contentEditable={isEdit}>{author}</QuoteAuthor>
               </QuoteContent>
             </Card>
             <ButtonContainer>
