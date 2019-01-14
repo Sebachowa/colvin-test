@@ -66,12 +66,14 @@ class QuoteShow extends React.Component {
     html2canvas(card, { 
       logging: true,
       useCORS: true,
-      taintTest : true
+      taintTest: true
     })
     .then((canvas) => {
+      console.log(canvas)
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
-      pdf.addImage(imgData, 'JPEG', 25, 25);
+      
+      pdf.addImage(imgData, 'JPEG', 25, 25, 150, 150);
       pdf.save("download.pdf");
     })
   }
